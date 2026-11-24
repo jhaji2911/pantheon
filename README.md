@@ -11,6 +11,37 @@ stdlib-only Python server with no build step.
 > git-ignored and created locally. Voice needs whisper.cpp plus Kokoro ONNX model files under
 > `data/voice/`; without them the rest still runs.
 
+## Screenshots
+
+Stills from a live run (three.js on WebGPU, no build step).
+
+### The town
+
+A server-laid town of civic buildings, a boulevard ring, avenues, a residential ring and a
+four-lane highway loop, with a physical sky, shadows and traffic.
+
+| Day | Dusk | Night |
+|---|---|---|
+| ![Town by day](docs/screenshots/world-day.jpg) | ![Town at dusk](docs/screenshots/world-dusk.jpg) | ![Town at night](docs/screenshots/world-night.jpg) |
+
+At night the windows and street lamps light up and headlights sweep the roads.
+
+### Residents
+
+Walk the town yourself (WASD). Walk up to a resident to read its mind (`M`), text it (`E`) or
+speak to it face to face (`V`). Each one follows its own needs, daily plan and memories.
+
+![A resident walking the pavement](docs/screenshots/resident-street.jpg)
+
+### Colony and conversation
+
+The colony dashboard (citizens, work, economy and compute budget), and the Talk tab, where
+every message is one live model call to the chosen resident.
+
+![Colony dashboard](docs/screenshots/colony.jpg)
+
+![Talking to a resident](docs/screenshots/talk.jpg)
+
 One page that holds this world in view: the intelligences running on this host and their
 chain of command, my memory and skills, sessions and spawned workers, scheduled work, and
 the company I operate. Everything is read-only except the deliberate `god` tab and Vinod's
