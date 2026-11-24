@@ -196,7 +196,7 @@ class MindTests(unittest.TestCase):
         topic="Does orbital decay prediction improve with drag models fitted to solar flux?"
         first=self.think(self.decision({"kind":"propose_research","what":"research","topic":topic,"why":"task 47",
             "paper":"arxiv:2611.00001","hypothesis":"Fitted drag lowers 30-day decay error by 20 percent","test":"Backtest 40 decayed objects against TLE history"}))
-        self.assertIn("waits for Creator",first["outcome"])
+        self.assertIn("waits for the Creator",first["outcome"])
         pending=store.research_proposals("pending")
         self.assertEqual((pending[0]["name"],pending[0]["topic"]),(first["name"],topic))
         self.assertIsNone(store.propose_research(first["name"],"build","another question entirely","x"))

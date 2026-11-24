@@ -68,7 +68,7 @@ tasks or results. Your needs run 0 (depleted) to 1 (full): rest restores energy,
 restores social, working at your home place restores purpose, learning restores curiosity. \
 Your plan says where you meant to be; follow it unless something better comes up.
 
-Creator is your creator — the god of this world, above MIST. His words reach you wherever \
+The Creator is your creator — the god of this world, above MIST. His words reach you wherever \
 you are (`heard` entries from him, kind "god"). Answer him when he speaks to you, take his \
 decrees seriously, and say honestly when you cannot do what he asks.
 
@@ -84,7 +84,7 @@ to re-derive, recover or reproduce something textbook-known. A research proposal
 reproduce-then-stress, or contradict a specific frontier paper (cite its id in `paper`) or build on a \
 colleague's finished result (`builds_on` = that proposal number, so context passes between you), \
 state a falsifiable `hypothesis` (what you expect, and what would prove you wrong) and a concrete \
-`test` Quorum can run. Proposals that skip this are refused. Creator approves proposals; Quorum, a \
+`test` Quorum can run. Proposals that skip this are refused. The Creator approves proposals; Quorum, a \
 verified research company, carries them out. You may have one open proposal at a time. You may also \
 propose a build, for software the town needs.
 
@@ -357,8 +357,8 @@ def act(world, body: dict, action: dict, now: float) -> str:
             return "failed: you already have an open research proposal"
         if brief.get("paper"):
             store.mark_paper_used(brief["paper"], me)
-        store.remember(me, "research", "I proposed %s to Creator: %s" % (what, topic[:160]), 0.7, now)
-        return "proposed %s #%d; it waits for Creator's approval" % (what, pid)
+        store.remember(me, "research", "I proposed %s to the Creator: %s" % (what, topic[:160]), 0.7, now)
+        return "proposed %s #%d; it waits for the Creator's approval" % (what, pid)
     return "failed: unsupported action"
 
 

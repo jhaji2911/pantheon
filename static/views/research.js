@@ -1,4 +1,4 @@
-/* RESEARCH — what the residents want to find out or build, and Creator's decision on it.
+/* RESEARCH — what the residents want to find out or build, and the Creator's decision on it.
  * GET  /api/research                 proposals (pending, running, done, rejected, failed)
  * POST /api/research/<id>/approve    hand it to Quorum (one engagement at a time)
  * POST /api/research/<id>/reject     decline; the resident is told and remembers why

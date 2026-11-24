@@ -1,4 +1,4 @@
-"""PDF digests for Creator, delivered to his Telegram through the Hermes bot.
+"""PDF digests for the Creator, delivered to his Telegram through the Hermes bot.
 
 Two reports, both real PDFs (rendered by the machine's own Chrome, no new dependency):
 

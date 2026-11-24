@@ -138,7 +138,7 @@ with **Q**) on slow machines.
 
 ## God, apps and Hermes (the super app)
 
-Creator is the god of this world (`modules/god.py`): a **decree** is heard by every resident
+The Creator is the god of this world (`modules/god.py`): a **decree** is heard by every resident
 wherever it is (and can also become the colony's standing directive), a **whisper** reaches one
 resident and is answered first, a **summons** walks residents to a place. Residents answer him
 with `say` to "Creator" from anywhere; answers land in his word log (`GET /api/god`). The

@@ -1,6 +1,6 @@
-"""God — Creator's voice in the world.
+"""God — the Creator's voice in the world.
 
-The charter puts Creator above MIST and every intelligence on this host. This module gives
+The charter puts the Creator above MIST and every intelligence on this host. This module gives
 that a direct form in Pantheon:
 
     GET  /api/god             his recent words, the residents, and the colony powers available

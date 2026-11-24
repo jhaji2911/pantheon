@@ -1,7 +1,7 @@
 """Residents' research and build proposals, carried out by Quorum after the principal approves.
 
 A resident's mind may `propose_research` (a question it needs evidence for) or propose a
-build. Nothing runs until Creator approves it in the console. An approved proposal becomes
+build. Nothing runs until the Creator approves it in the console. An approved proposal becomes
 one Quorum engagement through Company Control's own API (`POST /api/engagement`), so it is
 staffed, investigated with real search and arithmetic, verified, and adjudicated exactly as
 any other Quorum engagement; a build uses Quorum's software profile and engineering handoff.
@@ -67,7 +67,7 @@ def approve(pid: int) -> dict:
     })
     store.update_research(pid, status="running", decided=time.time(), job_id=out.get("job_id"), error=None)
     store.remember(prop["name"], "research",
-                   "Creator approved my %s proposal; Quorum started on: %s" % (prop["kind"], prop["topic"][:160]),
+                   "The Creator approved my %s proposal; Quorum started on: %s" % (prop["kind"], prop["topic"][:160]),
                    0.8)
     return {"proposal": store.research_proposal(pid), "quorum": out, "status": 202}
 
@@ -79,7 +79,7 @@ def reject(pid: int, reason: str = "") -> dict:
     if prop["status"] != "pending":
         return {"error": "proposal is %s, not pending" % prop["status"], "status": 409}
     store.update_research(pid, status="rejected", decided=time.time(), error=reason[:300] or None)
-    store.remember(prop["name"], "research", "Creator declined my %s proposal on %s%s" %
+    store.remember(prop["name"], "research", "The Creator declined my %s proposal on %s%s" %
                    (prop["kind"], prop["topic"][:120], (": " + reason[:120]) if reason else ""), 0.7)
     return {"proposal": store.research_proposal(pid), "status": 200}
 
@@ -98,7 +98,7 @@ def _paper_opening(path: str | None, limit: int = 900) -> str:
 
 
 def _deliver(pid: int) -> None:
-    """Render the finished paper to PDF and send it to Creator's Telegram (off the mind loop)."""
+    """Render the finished paper to PDF and send it to the Creator's Telegram (off the mind loop)."""
     try:
         digest.send_research(pid)
     except Exception:                                             # noqa: BLE001 - retried by send_pending_research
