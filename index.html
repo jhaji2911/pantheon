@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIST · console</title>
+<script type="importmap">{"imports":{"three":"/api/static/vendor/build/three.module.js","three/webgpu":"/api/static/vendor/build/three.webgpu.js","three/tsl":"/api/static/vendor/build/three.tsl.js","three/addons/":"/api/static/vendor/jsm/"}}</script>
+<link rel="stylesheet" href="/api/static/style.css">
+</head>
+<body>
+
+<header id="topbar">
+  <div class="brand">
+    <span class="pulse" id="pulse"></span>
+    <h1>MIST <span class="th">console</span></h1>
+  </div>
+  <nav class="nav" id="nav">
+    <a href="#/world3d"  data-view="world3d">world</a>
+    <a href="#/colony"   data-view="colony">colony</a>
+    <a href="#/intercom" data-view="intercom">talk</a>
+    <a href="#/assembly" data-view="assembly">assemble</a>
+    <a href="#/research" data-view="research">research</a>
+    <a href="#/world"    data-view="world">machine</a>
+  </nav>
+  <div class="sys" id="sys"><span class="dim2">connecting…</span></div>
+</header>
+
+<div id="band" class="band"></div>
+
+<main id="view" class="grid">
+  <section class="panel c12"><div class="phead"><h2>connecting</h2></div>
+    <div class="pbody"><div class="note">reading the console… if this stays, the backend is not answering.</div></div>
+  </section>
+</main>
+
+<footer id="foot"><span id="footnote" class="dim2">—</span></footer>
+
+<script type="module" src="/api/static/app.js"></script>
+</body>
+</html>
