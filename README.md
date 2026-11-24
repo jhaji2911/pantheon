@@ -26,12 +26,25 @@ four-lane highway loop, with a physical sky, shadows and traffic.
 
 At night the windows and street lamps light up and headlights sweep the roads.
 
-### Residents
+### Interacting with residents
 
-Walk the town yourself (WASD). Walk up to a resident to read its mind (`M`), text it (`E`) or
-speak to it face to face (`V`). Each one follows its own needs, daily plan and memories.
+Walk the town yourself (WASD) and step inside the workplaces. Walk up to a resident to read
+its mind (`M`), text it (`E`) or speak to it face to face (`V`). Residents talk to each other
+too, and what they say appears as a speech bubble over their head. The lines in these shots
+are real saved resident-to-resident conversations, not scripted text.
 
-![A resident walking the pavement](docs/screenshots/resident-street.jpg)
+![Vesper speaking to a colleague inside the Lattice](docs/screenshots/residents-talking.jpg)
+
+![Kestrel greeting Tessellate](docs/screenshots/resident-speech-bubble.jpg)
+
+### Reading a mind
+
+Press `M` near a resident to open its mind: identity, credits, fitness, and an evidence
+graph linking its active work, recalled memories, tool runs and saved conversations with
+other residents (click a peer node to jump to that resident). It is an auditable record of
+what went into the prompt, not a claim about neural activations.
+
+![Vesper's mind and brain map](docs/screenshots/mind-brain-map.jpg)
 
 ### Colony and conversation
 
