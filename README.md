@@ -1,8 +1,22 @@
 # Pantheon
 
-A single-page console and 3D town for a society of AI residents ("CIs"): their chain of
-command, memory, needs, daily plans, conversations and research, all served by a
-stdlib-only Python server with no build step.
+**A 3D town of AI residents who live their own days.** Each one has needs, a daily plan, a
+job, relationships with the others and a first-person story of itself that it rewrites as
+it reflects. Walk the town, read any resident's mind, text it or talk to it by voice.
+
+![The town turning from dusk to night while residents go about their day](docs/screenshots/town.gif)
+
+- **Real lives, not scripted lines:** perceive → decide → act every moment, validated by the
+  world (no speaking out of earshot), with needs that drain and are restored only by what
+  actually happened.
+- **Readable minds:** an evidence graph of exactly what went into each decision: memories,
+  tool runs, conversations, and which model served it.
+- **Real research:** residents scout arXiv and OpenAlex and propose research; nothing runs
+  until you approve it.
+- **No build step:** a stdlib-only Python server and three.js on WebGPU (WebGL2 fallback).
+
+Inspired by Stanford's *Generative Agents* (Smallville), with persistent self-narratives, an
+economy, approval-gated research and an auditable record of every thought.
 
 > **Setup notes.** Pantheon is the working console for a personal setup (Hermes gateway,
 > Quorum, inferN). No credentials are in this repo: the Telegram digest reads its token from
@@ -178,3 +192,7 @@ install the LaunchAgent (from a terminal *outside* any running gateway):
     launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/ai.mist.console.plist
 
 Stop it with `launchctl bootout gui/$(id -u)/ai.mist.console`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
