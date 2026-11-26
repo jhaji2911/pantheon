@@ -16,6 +16,7 @@ import uuid
 
 from bridge import Record
 from colony import settings, transport
+import llm
 import pantheon
 import store
 
@@ -172,7 +173,7 @@ def create_asset(brief, record=None, relay=None):
     usage = result.get("usage") or {}
     billing = usage.get("opencode") or {}
     model_cost = float(usage.get("cost") or 0)
-    if model_cost != 0 or billing.get("billing_source") != "go":
+    if not llm.STANDALONE and (model_cost != 0 or billing.get("billing_source") != "go"):
         return {"error": "asset build refused: OpenCode did not confirm zero-cost Go billing",
                 "status": 502, "model": result.get("model") or MODEL,
                 "billing_source": billing.get("billing_source"), "cost": model_cost}

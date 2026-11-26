@@ -18,12 +18,38 @@ it reflects. Walk the town, read any resident's mind, text it or talk to it by v
 Inspired by Stanford's *Generative Agents* (Smallville), with persistent self-narratives, an
 economy, approval-gated research and an auditable record of every thought.
 
-> **Setup notes.** Pantheon is the working console for a personal setup (Hermes gateway,
-> Quorum, inferN). No credentials are in this repo: the Telegram digest reads its token from
-> `~/.hermes/.env` (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_HOME_CHANNEL`) and the model relay is
-> configured outside the repo. Runtime state (`data/console.db`, logs, voice models) is
-> git-ignored and created locally. Voice needs whisper.cpp plus Kokoro ONNX model files under
-> `data/voice/`; without them the rest still runs.
+## Quick start
+
+You need Python 3.10+ (standard library only), a WebGPU-capable browser (recent Chrome or
+Edge; others fall back to WebGL2) and any OpenAI-compatible model endpoint. With
+[Ollama](https://ollama.com):
+
+    ollama pull qwen3:4b-instruct
+    git clone https://github.com/jhaji2911/pantheon.git
+    cd pantheon
+    python3 serve.py            # → http://127.0.0.1:8790
+
+Open the page, click into the world, and press **B** to switch the residents' minds on. The
+first run seeds a demo colony of six residents in `data/` (git-ignored).
+
+Any OpenAI-compatible endpoint works (LM Studio, llama.cpp's server, vLLM, OpenAI…):
+
+| Variable | Default |
+|---|---|
+| `PANTHEON_LLM_BASE_URL` | `http://127.0.0.1:11434/v1` (Ollama) |
+| `PANTHEON_LLM_API_KEY` | none |
+| `PANTHEON_MODEL` | the first chat model the endpoint lists |
+| `PANTHEON_MODEL_ARCHITECT`, `_WORKER`, … | per-tier override |
+
+Small models work but think simply. A 7B+ model gives noticeably better plans and
+conversations, and every resident's moment is one model call, so a fast endpoint matters.
+
+> **Standalone vs. full setup.** Pantheon grew out of a larger personal setup: Colony (the
+> agent runtime whose residents do verified work), Quorum (agent-run research) and the Hermes
+> gateway. With no Colony checkout it runs in standalone mode on the seeded demo colony, and the
+> tabs that need those services (machine, research runs, apps) report that they're unavailable
+> rather than breaking the page. Voice needs whisper.cpp plus Kokoro ONNX model files under
+> `data/voice/`; without them the rest still runs. No credentials are in this repo.
 
 ## Screenshots
 

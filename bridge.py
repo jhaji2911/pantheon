@@ -12,19 +12,30 @@ mind, with its own prompt cache and its own memory, that works in the colony.
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import re
 import sqlite3
 import sys
 import time
 
-COLONY_REPO = pathlib.Path.home() / "Code" / "colony"
+# A real Colony checkout if there is one (PANTHEON_COLONY, else ~/Code/colony); otherwise the
+# bundled standalone stand-in with a seeded demo colony and any OpenAI-compatible model.
+COLONY_REPO = pathlib.Path(os.environ.get("PANTHEON_COLONY") or pathlib.Path.home() / "Code" / "colony")
+STANDALONE = not (COLONY_REPO / "colony" / "transport.py").is_file()
+if STANDALONE:
+    COLONY_REPO = pathlib.Path(__file__).resolve().parent / "standalone"
 if str(COLONY_REPO) not in sys.path:
     sys.path.insert(0, str(COLONY_REPO))
 
 from colony import instruments, mind, settings, transport          # noqa: E402
 
-DB_PATH = COLONY_REPO / "data" / "colony.db"
+if STANDALONE:
+    from colony import seed                                         # noqa: E402
+    seed.ensure()
+    DB_PATH = settings.DB_PATH
+else:
+    DB_PATH = COLONY_REPO / "data" / "colony.db"
 
 
 class ColonyGone(RuntimeError):

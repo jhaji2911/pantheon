@@ -32,11 +32,20 @@ ROUTES = {
 }
 
 
+STANDALONE = bool(getattr(transport, "STANDALONE", False))
+PROVIDER = "openai-compatible" if STANDALONE else "opencode-go"
+
+
 def free_go(usage: dict) -> bool:
     """True only for a Go-billed call that cost nothing and drew nothing from the plan."""
     oc = (usage or {}).get("opencode") or {}
     return (oc.get("billing_source") == "go" and float((usage or {}).get("cost") or 0) == 0
             and float(oc.get("list_cost") or 0) == 0 and float(oc.get("allowance") or 0) == 0)
+
+
+def billing_ok(usage: dict) -> bool:
+    """Standalone calls go to an endpoint you chose yourself, so there is no plan to protect."""
+    return STANDALONE or free_go(usage)
 
 
 def _local(system, user, schema, max_tokens, temperature, timeout):
@@ -73,13 +82,13 @@ def _cloud(model, system, user, max_tokens, temperature, relay):
                                       {"role": "user", "content": user}],
                         max_tokens=max_tokens, temperature=temperature, tier="worker")
     usage = result.get("usage") or {}
-    base = {"locality": "cloud", "model": result.get("model") or model, "provider": "opencode-go",
+    base = {"locality": "cloud", "model": result.get("model") or model, "provider": PROVIDER,
             "ms": result.get("ms"),
             "tokens": int(usage.get("total_tokens") or
                           (usage.get("prompt_tokens") or 0) + (usage.get("completion_tokens") or 0))}
     if not result.get("ok"):
         return {**base, "ok": False, "error": result.get("error") or "relay call failed"}
-    if not free_go(usage):
+    if not billing_ok(usage):
         return {**base, "ok": False, "error": "refused: OpenCode did not confirm a free Go call "
                 "(zero cost, list cost and allowance)"}
     return {**base, "ok": True, "text": result.get("content") or ""}

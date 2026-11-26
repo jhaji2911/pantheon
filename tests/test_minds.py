@@ -9,6 +9,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0,str(ROOT))
 
 import frontier
+import llm
 import life
 import minds
 import research
@@ -45,6 +46,8 @@ class ScriptedLocal:
 class MindTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory()
+        # The billing guards are colony-mode behaviour; test them even in a standalone checkout.
+        self._standalone=llm.STANDALONE;llm.STANDALONE=False
         self._db=store.DB;store.DB=Path(self.tmp.name)/"console.db"
         self._record=minds.Record
         minds.Record=lambda:(_ for _ in ()).throw(RuntimeError("no colony in tests"))
@@ -59,7 +62,7 @@ class MindTests(unittest.TestCase):
             b["plan_day"]=life.world_day(self.now);b["plan"]=None
 
     def tearDown(self):
-        store.DB=self._db;minds.Record=self._record;research.poll=self._poll;self.tmp.cleanup()
+        llm.STANDALONE=self._standalone;store.DB=self._db;minds.Record=self._record;research.poll=self._poll;self.tmp.cleanup()
 
     def decision(self,action,goal="find Kestrel"):
         return {"thought":"reasoning","goal":goal,"action":action}

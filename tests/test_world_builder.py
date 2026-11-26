@@ -5,6 +5,7 @@ from unittest.mock import patch
 
 import store
 from modules import world_builder
+import llm
 
 
 class FakeRecord:
@@ -37,6 +38,10 @@ class FakeRelay:
 class WorldBuilderTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
+        # The billing guards are colony-mode behaviour; test them even in a standalone checkout.
+        standalone = patch.object(llm, "STANDALONE", False)
+        standalone.start()
+        self.addCleanup(standalone.stop)
         self.old_data, self.old_db = store.DATA, store.DB
         store.DATA = Path(self.temp.name)
         store.DB = Path(self.temp.name) / "console.db"

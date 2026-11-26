@@ -393,7 +393,7 @@ function markNav(){
     a.classList.toggle("active", on);
   });
   const titles = {world3d: "world", world: "machine", colony: "colony", ci: "CI", intercom: "talk", assembly: "assemble", research: "research"};
-  document.title = "MIST · " + (titles[v] || v) + (cur && cur.route.params[0] ? " · " + cur.route.params[0] : "");
+  document.title = "Pantheon · " + (titles[v] || v) + (cur && cur.route.params[0] ? " · " + cur.route.params[0] : "");
 }
 
 export function routeTo(){
